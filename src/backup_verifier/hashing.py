@@ -8,6 +8,11 @@ from dataclasses import dataclass
 from pathlib import Path
 
 CHUNK_SIZE = 1024 * 1024
+_WINDOWS_LINK_TAGS = (
+    (stat.IO_REPARSE_TAG_MOUNT_POINT, stat.IO_REPARSE_TAG_SYMLINK)
+    if os.name == "nt"
+    else ()
+)
 
 
 @dataclass(frozen=True)
@@ -30,9 +35,9 @@ class UnstableFileError(FileReadError):
 
 def is_link(info: os.stat_result) -> bool:
     """Treat Windows directory junctions like symbolic links."""
-    return stat.S_ISLNK(info.st_mode) or getattr(info, "st_reparse_tag", None) in (
-        stat.IO_REPARSE_TAG_MOUNT_POINT,
-        stat.IO_REPARSE_TAG_SYMLINK,
+    return (
+        stat.S_ISLNK(info.st_mode)
+        or getattr(info, "st_reparse_tag", None) in _WINDOWS_LINK_TAGS
     )
 
 

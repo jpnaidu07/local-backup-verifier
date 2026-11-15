@@ -67,6 +67,7 @@ class ScannerTests(unittest.TestCase):
             ("broken", "symlink"), ("linked", "symlink"),
         ])
 
+    @unittest.skipUnless(os.name == "nt", "Windows directory junction behavior")
     def test_junction_is_recognized_as_a_link(self):
         info = SimpleNamespace(st_mode=stat.S_IFDIR, st_reparse_tag=stat.IO_REPARSE_TAG_MOUNT_POINT)
         self.assertTrue(is_link(info))
