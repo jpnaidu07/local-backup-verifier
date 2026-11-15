@@ -92,3 +92,11 @@ python -m unittest discover -s tests -v
 ```
 
 GitHub Actions runs the test suite on Ubuntu. The end-to-end test checks the demo in both output formats.
+
+## Design specifications
+
+- [High-level design](docs/specs/high-level-design.md) covers the workflows, architecture, and trust boundary.
+- [Low-level design](docs/specs/low-level-design.md) describes the algorithms and how errors affect results.
+- [Component specification](docs/specs/components.md) maps module interfaces, dependencies, and tests.
+- [CLI and data contracts](docs/specs/cli-and-data-contracts.md) defines flags, exit codes, manifest v1, and report fields.
+- [Test plan](docs/specs/test-plan.md) maps acceptance criteria to Ubuntu checks.
