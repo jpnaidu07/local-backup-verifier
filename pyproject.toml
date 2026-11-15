@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-backup-verifier"
+version = "0.1.0"
+description = "Create and verify SHA-256 manifests for local backups"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+backup-verifier = "backup_verifier.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
